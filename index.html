@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>이력서·자소서 소액 첨삭</title>
+<style>
+  :root { --bg:#0f1115; --card:#1a1d24; --text:#e8eaed; --muted:#9aa0a6; --accent:#7c9cff; --line:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:var(--bg); color:var(--text); line-height:1.55; }
+  main { max-width:720px; margin:0 auto; padding:32px 20px 64px; }
+  h1 { font-size:1.6rem; margin:0 0 8px; }
+  .sub { color:var(--muted); margin-bottom:28px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 18px; margin-bottom:16px; }
+  h2 { font-size:1.05rem; margin:0 0 10px; }
+  .sample-before { color:var(--muted); text-decoration: line-through; }
+  .sample-after { color:#b7f0c2; }
+  table { width:100%; border-collapse:collapse; font-size:0.95rem; }
+  th, td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--line); }
+  th { color:var(--muted); font-weight:600; }
+  .price { color:var(--accent); font-weight:700; }
+  label { display:block; font-size:0.85rem; color:var(--muted); margin:12px 0 6px; }
+  input, select, textarea { width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:#12151b; color:var(--text); }
+  textarea { min-height:90px; resize:vertical; }
+  button, .btn { display:inline-block; margin-top:16px; background:var(--accent); color:#0b1020; border:0; border-radius:8px; padding:12px 16px; font-weight:700; cursor:pointer; text-decoration:none; }
+  .note { font-size:0.85rem; color:var(--muted); margin-top:10px; }
+  .badge { display:inline-block; font-size:0.75rem; padding:3px 8px; border-radius:999px; background:#243056; color:#c5d2ff; margin-bottom:12px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="badge">초기비 0 · 입금 확인 후 작업</div>
+  <h1>이력서·자소서 소액 첨삭</h1>
+  <p class="sub">취준·이직 문장을 숫자·역할·직무 키워드 기준으로 다듬습니다.</p>
+
+  <section class="card">
+    <h2>샘플 (한 줄)</h2>
+    <p class="sample-before">원문: 책임감을 가지고 SNS를 운영하며 팔로워를 늘렸습니다.</p>
+    <p class="sample-after">수정: 동아리 SNS 운영 리드로 콘텐츠 기획·업로드·응대를 맡아, 3개월간 팔로워 320→1,100, 모집 지원 47·최종 12명을 만들었습니다.</p>
+  </section>
+
+  <section class="card">
+    <h2>가격</h2>
+    <table>
+      <thead><tr><th>상품</th><th>내용</th><th>가격</th><th>납기</th></tr></thead>
+      <tbody>
+        <tr><td>라이트</td><td>자소서 1문항 또는 이력서 1장</td><td class="price">7,000원</td><td>당일~24h</td></tr>
+        <tr><td>스탠다드</td><td>이력서 + 자소서 2문항</td><td class="price">15,000원</td><td>24h</td></tr>
+        <tr><td>풀</td><td>전체(최대 4문항) + 면접질문 5</td><td class="price">28,000원</td><td>48h</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>주문</h2>
+    <form id="order">
+      <label for="plan">상품</label>
+      <select id="plan" name="plan" required>
+        <option value="라이트">라이트 — 7,000원</option>
+        <option value="스탠다드">스탠다드 — 15,000원</option>
+        <option value="풀">풀 — 28,000원</option>
+      </select>
+      <label for="role">지원 직무</label>
+      <input id="role" name="role" required placeholder="예: 마케팅 인턴"/>
+      <label for="contact">연락처 (이메일 또는 카톡 ID)</label>
+      <input id="contact" name="contact" required placeholder="reply@example.com"/>
+      <label for="doc">원고 링크 (개인정보 가린 구글독/노션)</label>
+      <input id="doc" name="doc" required placeholder="https://..."/>
+      <label for="payer">입금자명</label>
+      <input id="payer" name="payer" required/>
+      <label for="note">요청 사항</label>
+      <textarea id="note" name="note" placeholder="강조하고 싶은 경험 등"></textarea>
+      <button type="submit">주문 이슈로 보내기</button>
+      <p class="note">제출 시 GitHub Issues로 주문이 접수됩니다. 결제(토스/계좌) 안내는 수취 수단 연결 후 이 페이지에 업데이트됩니다.</p>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>결제</h2>
+    <p class="note">수취 수단 1회 연결 대기 중. 연결되면 토스/계좌 안내가 여기 표시됩니다.</p>
+  </section>
+</main>
+<script>
+document.getElementById('order').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var plan = document.getElementById('plan').value;
+  var role = document.getElementById('role').value.trim();
+  var contact = document.getElementById('contact').value.trim();
+  var doc = document.getElementById('doc').value.trim();
+  var payer = document.getElementById('payer').value.trim();
+  var note = document.getElementById('note').value.trim();
+  var title = encodeURIComponent('[주문] ' + plan + ' / ' + role);
+  var body = encodeURIComponent(
+    '상품: ' + plan + '\n' +
+    '지원 직무: ' + role + '\n' +
+    '연락처: ' + contact + '\n' +
+    '원고 링크: ' + doc + '\n' +
+    '입금자명: ' + payer + '\n' +
+    '요청 사항: ' + (note || '-') + '\n'
+  );
+  var repo = window.ORDER_REPO || 'parkjin-lab/resume-critique-store';
+  window.location.href = 'https://github.com/' + repo + '/issues/new?title=' + title + '&body=' + body;
+});
+</script>
+</body>
+</html>
